@@ -7,3 +7,12 @@ result
 target
 
 firmware
+*.uf2
+/zmk/
+/.west/
+/build/
+/modules/
+/zephyr/
+/zmk-dongle-display/
+/zmk-helpers/
+/zmk-rgbled-widget/
