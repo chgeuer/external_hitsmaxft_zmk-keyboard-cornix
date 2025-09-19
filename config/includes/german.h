@@ -52,3 +52,8 @@
 #define DE_AE SQT         // ä (a-umlaut)
 #define DE_OE SEMI        // ö (o-umlaut)
 #define DE_UE LBRC        // ü (u-umlaut)
+
+// Additional German characters
+#define DE_CARET RA(GRAVE) // ^ (circumflex)
+#define DE_EQL LS(N0)      // = (equals)
+#define DE_GRAVE GRAVE     // ` (grave accent)

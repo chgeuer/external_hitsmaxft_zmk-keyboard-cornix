@@ -1,0 +1,340 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "zmk-helpers/helper.h"
+#include "includes/cornix54.h"
+#include "includes/german.h"
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/mouse.h>
+
+// tap windows for ctl alt and gui
+
+#define HM_TAPPING_TERM 250
+#define HM_TAPPING_REPEAT 210
+
+// quick tapping for shift
+
+#define HM_TAPPING_TERM_FAST 200
+#define HM_PRIOR_IDLE 70
+#define COLEMAK 0
+#define LOWER 1
+#define RAISE 2
+#define ADJUST 3
+
+// https://github.com/urob/zmk-config/tree/main#timeless-homerow-mods
+
+#define KEYS_L LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5  // left hand
+#define KEYS_R RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 RB5  // right hand
+#define THUMBS LH1 LH0 RH0 RH1
+#define KEYS_T LH1 LH0 RH0 RH1
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 15
+
+#include <dt-bindings/zmk/ext_power.h>
+#include <dt-bindings/zmk/pointing.h>
+
+/ {
+    // Activate ADJUST layer by pressing raise and lower
+
+    behaviors {
+        pos000: pos000 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N0 &kp SPACE>; };
+        pos001: pos001 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N1 &kp SPACE>; };
+        pos002: pos002 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N2 &kp SPACE>; };
+        pos003: pos003 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N3 &kp SPACE>; };
+        pos004: pos004 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N4 &kp SPACE>; };
+        pos005: pos005 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N5 &kp SPACE>; };
+        pos006: pos006 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N6 &kp SPACE>; };
+        pos007: pos007 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N7 &kp SPACE>; };
+        pos008: pos008 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N8 &kp SPACE>; };
+        pos009: pos009 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N0 &kp N9 &kp SPACE>; };
+        pos010: pos010 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N0 &kp SPACE>; };
+        pos011: pos011 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N1 &kp SPACE>; };
+        pos012: pos012 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N2 &kp SPACE>; };
+        pos013: pos013 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N3 &kp SPACE>; };
+        pos014: pos014 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N4 &kp SPACE>; };
+        pos015: pos015 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N5 &kp SPACE>; };
+        pos016: pos016 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N6 &kp SPACE>; };
+        pos017: pos017 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N7 &kp SPACE>; };
+        pos018: pos018 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N8 &kp SPACE>; };
+        pos019: pos019 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N1 &kp N9 &kp SPACE>; };
+        pos020: pos020 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N0 &kp SPACE>; };
+        pos021: pos021 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N1 &kp SPACE>; };
+        pos022: pos022 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N2 &kp SPACE>; };
+        pos023: pos023 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N3 &kp SPACE>; };
+        pos024: pos024 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N4 &kp SPACE>; };
+        pos025: pos025 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N5 &kp SPACE>; };
+        pos026: pos026 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N6 &kp SPACE>; };
+        pos027: pos027 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N7 &kp SPACE>; };
+        pos028: pos028 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N8 &kp SPACE>; };
+        pos029: pos029 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N2 &kp N9 &kp SPACE>; };
+        pos030: pos030 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N0 &kp SPACE>; };
+        pos031: pos031 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N1 &kp SPACE>; };
+        pos032: pos032 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N2 &kp SPACE>; };
+        pos033: pos033 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N3 &kp SPACE>; };
+        pos034: pos034 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N4 &kp SPACE>; };
+        pos035: pos035 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N5 &kp SPACE>; };
+        pos036: pos036 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N6 &kp SPACE>; };
+        pos037: pos037 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N7 &kp SPACE>; };
+        pos038: pos038 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N8 &kp SPACE>; };
+        pos039: pos039 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N3 &kp N9 &kp SPACE>; };
+        pos040: pos040 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N0 &kp SPACE>; };
+        pos041: pos041 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N1 &kp SPACE>; };
+        pos042: pos042 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N2 &kp SPACE>; };
+        pos043: pos043 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N3 &kp SPACE>; };
+        pos044: pos044 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N4 &kp SPACE>; };
+        pos045: pos045 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N5 &kp SPACE>; };
+        pos046: pos046 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N6 &kp SPACE>; };
+        pos047: pos047 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N7 &kp SPACE>; };
+        pos048: pos048 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N8 &kp SPACE>; };
+        pos049: pos049 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N4 &kp N9 &kp SPACE>; };
+        pos050: pos050 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N5 &kp N0 &kp SPACE>; };
+        pos051: pos051 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N5 &kp N1 &kp SPACE>; };
+        pos052: pos052 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N5 &kp N2 &kp SPACE>; };
+        pos053: pos053 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N5 &kp N3 &kp SPACE>; };
+        pos054: pos054 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N5 &kp N4 &kp SPACE>; };
+        pos055: pos055 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N0 &kp N5 &kp N5 &kp SPACE>; };
+        // Dead key macros for German typing
+        grave_macro: grave_macro {
+            label = "Grave_Macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE &kp SPACE>;
+        };
+
+        acute_macro: acute_macro {
+            label = "Acute_Macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(EQUAL) &kp SPACE>;
+        };
+
+        circumflex_macro: circumflex_macro {
+            label = "Circumflex_Macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL &kp SPACE>;
+        };
+
+        hm_l: homerow_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;                // repeat on tap-into-hold
+            require-prior-idle-ms = <HM_PRIOR_IDLE>;
+            hold-trigger-key-positions = <KEYS_R KEYS_T>;
+            hold-trigger-on-release;
+        };
+
+        hm_r: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <HM_PRIOR_IDLE>;
+            hold-trigger-key-positions = <KEYS_L KEYS_T>;
+            hold-trigger-on-release;
+        };
+
+        // Positional Homerow mods for shift
+        // Use faster tapping term and disable some features that may
+        // cause false negatives.
+
+        hm_shift_l: hm_shift_l {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            //flavor = "balanced";
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM_FAST>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <HM_PRIOR_IDLE>;
+            hold-trigger-key-positions = <KEYS_R KEYS_T>;
+            hold-trigger-on-release;
+        };
+
+        hm_shift_r: hm_shift_r {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM_FAST>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <HM_PRIOR_IDLE>;
+            hold-trigger-key-positions = <KEYS_L KEYS_T>;
+
+            // for quick tapping; shift+~
+
+            hold-trigger-on-release;
+        };
+
+        /*
+         * Non-Positional Homerow Mods
+         * Used for &mm_grescm_gui behavior on left hand.
+         *
+         * Usage: &hm LSHFT T
+         * Tap: T
+         * Tap-Tap-Hold: Repeat T
+         * Hold: LSHIFT
+         */
+
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;
+        };
+
+        lt: layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+
+            flavor = "hold-preferred";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        adjust_layer {
+            if-layers = <LOWER RAISE>;
+            then-layer = <ADJUST>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        cb_ltm {
+            bindings = <&kp ESC>;
+            key-positions = <2 4>;
+            layers = <0 1>;
+        };
+
+        cb_lm {
+            bindings = <&kp TAB>;
+            key-positions = <14 16>;
+            layers = <0 1>;
+        };
+
+        cb_enter {
+            bindings = <&kp RET>;
+            key-positions = <21 19>;
+            layers = <0 1>;
+        };
+
+        layer3 {
+            bindings = <&kp N3>;
+            key-positions = <5 6>;
+        };
+
+        layer4 {
+            bindings = <&kp N4>;
+            key-positions = <5 6>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        colemak_layer {
+            display-name = "Colemak";
+
+            // German Colemak-DHm with homerow mods - Matrix positions:
+            // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
+            // │ ESC │  Q  │  W  │  F  │  P  │  B  │                 │  J  │  L  │  U  │  Y  │  ß  │ +   │
+            // │ TAB │  A  │  R  │  S  │  T  │  G  │                 │  M  │  N  │  E  │  I  │  O  │ #   │
+            // │CTRL │  Z  │  X  │  C  │  D  │  V  │[030]│   │[031]  │  K  │  H  │  ,  │  .  │  -  │SHFT │
+            // ╰───────────────╮ ← │ → │BSPC │SPC1 │SnagIt│     │ DEL │SPC2 │ENT │Menu │ ↑ │ ↓ │
+            //                 ╰─────────────────────────╯     ╰─────────────────────────╯
+            // Homerow: A(Alt) R(GUI) S(Ctrl) T(Shift)     N(Shift) E(Ctrl) I(GUI) O(Alt)
+            // Encoders: [030]=Left encoder button (disabled), [031]=Right encoder button (mute)
+
+            bindings = <
+&kp ESC           &kp Q               &kp W               &kp F               &kp P                   &kp B                                           &kp J               &kp L                   &kp U               &kp DE_Y            &kp DE_SS           &kp DE_PLUS         &none               &none
+&kp TAB           &hm_l LALT A        &hm_l LGUI R        &hm_l LCTRL S       &hm_shift_l LSHFT T     &kp G                                           &kp M               &hm_shift_r RSHFT N     &hm_r RCTRL E       &hm_r RGUI I        &hm_r LALT O        &kp DE_HASH         &none               &none
+&kp LCTRL         &kp DE_Z            &kp DE_X            &kp C               &kp D                   &kp V           &none           &kp C_MUTE      &kp K               &kp H                   &kp COMMA           &kp DOT             &kp DE_MINS         &kp RSHFT           &none               &none
+&kp LCTRL         &kp LEFT            &kp RIGHT           &kp BSPC            &lt 1 SPACE             &kp LC(LS(S))                                   &kp DEL             &lt 2 SPACE             &kp RET             &kp K_CONTEXT_MENU  &kp UP              &kp DOWN            &none               &none
+            >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        lower_layer {
+            display-name = "Lower";
+
+            // German symbol layer matching ZSA Voyager layout
+            // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
+            // │`MRC │  !  │  "  │  $  │  &  │  %  │                 │     │  (  │  )  │  -  │  =  │ \   │
+            // │  |  │  @  │  ~  │  €  │  +  │  *  │                 │↑WHL │  {  │  }  │  [  │  ]  │ '   │
+            // │     │     │  °  │  §  │     │     │                 │↓WHL │  <  │  >  │  :  │  /  │'MRC │
+            // ╰───────────────╮     │     │     │     │     │     │     │FUNC │     │     │^MRC │
+            //                 ╰─────────────────────────╯     ╰─────────────────────────╯
+
+            bindings = <
+&circumflex_macro &kp DE_EXLM         &kp DE_DQOT         &kp DE_DLR          &kp DE_AMPR         &kp DE_PERC                                     &trans              &kp DE_LPRN         &kp DE_RPRN         &kp DE_MINS         &kp DE_EQL          &kp DE_BSLS         &none               &kp C_MUTE
+&kp DE_PIPE       &kp DE_AT           &kp DE_TILD         &kp DE_EURO         &kp PLUS            &kp DE_ASTR                                     &msc SCRL_UP        &kp DE_LCBR         &kp DE_RCBR         &kp DE_LBRC         &kp DE_RBRC         &kp DE_QUOT         &none               &none
+&trans            &trans              &kp DE_RING         &kp DE_PARA         &trans              &trans          &trans          &trans          &msc SCRL_DOWN      &kp DE_LESS         &kp DE_MORE         &kp DE_COLN         &kp DE_SLSH         &acute_macro        &none               &none
+&none             &none               &none               &trans              &trans              &trans                                          &trans              &mo ADJUST          &trans              &trans              &trans              &trans              &grave_macro        &none
+            >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        raise_layer {
+            display-name = "Raise";
+
+            // Number and function key layer
+            // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
+            // │     │  1  │  2  │  3  │  4  │  5  │                 │  6  │  7  │  8  │  9  │  0  │HOME │
+            // │     │ F1  │ F2  │ F3  │ F4  │ F5  │                 │ F6  │ ←   │ ↓   │ ↑   │ →   │PGUP │
+            // │     │ F7  │ F8  │ F9  │F10  │F11  │                 │F12  │M←  │M↓  │M↑  │M→  │PGDN │
+            // ╰───────────────╮     │     │     │FUNC │     │     │BTN1 │BTN2 │     │ END │
+            //                 ╰─────────────────────────╯     ╰─────────────────────────╯
+
+            bindings = <
+&trans            &kp N1              &kp N2              &kp N3              &kp N4              &kp N5                                          &kp N6              &kp N7              &kp N8              &kp N9              &kp N0              &kp HOME            &none               &kp C_MUTE
+&trans            &hm_l LALT F1       &hm_l LGUI F2       &hm_l LCTRL F3      &hm_shift_l LSHFT F4 &kp F5                                         &kp F6              &hm_shift_r RSHFT LEFT &hm_r RCTRL DOWN &hm_r RGUI UP       &hm_r LALT RIGHT    &kp PG_UP           &none               &none
+&trans            &kp F7              &kp F8              &kp F9              &kp F10             &kp F11         &trans          &trans          &kp F12             &mmv MOVE_LEFT      &mmv MOVE_DOWN      &mmv MOVE_UP        &mmv MOVE_RIGHT     &kp PG_DN           &none               &none
+&none             &none               &none               &trans              &mo ADJUST          &trans                                          &trans              &trans              &mkp LCLK           &mkp RCLK           &trans              &trans              &kp END             &none
+            >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        adjust_layer {
+            display-name = "Adjust";
+
+            // Function layer - matches Voyager Layer 3 with Bluetooth, media, and German umlauts
+            // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
+            // │BTCLR│ BT1 │ BT2 │ BT3 │ BT4 │ BT5 │                 │     │VOL+ │PREV │NEXT │     │     │
+            // │BTALL│BTDI1│BTDI2│BTDI3│BTDI4│BTDI5│                 │     │VOL- │MUTE │PLAY │STOP │     │
+            // │SHFT │     │     │     │SHFT │BOOT │                 │BOOT │  ä  │  ö  │  ü  │  ß  │     │
+            // ╰───────────────╮     │     │     │     │     │     │     │     │     │     │     │
+            //                 ╰─────────────────────────╯     ╰─────────────────────────╯
+
+            bindings = <
+&bt BT_CLR        &bt BT_SEL 0        &bt BT_SEL 1        &bt BT_SEL 2        &bt BT_SEL 3        &bt BT_SEL 4                                    &trans              &kp C_VOL_UP        &kp C_PREV          &kp C_NEXT          &trans              &trans              &none               &kp C_MUTE
+&bt BT_CLR_ALL    &bt BT_DISC 0       &bt BT_DISC 1       &bt BT_DISC 2       &bt BT_DISC 3       &bt BT_DISC 4                                   &trans              &kp C_VOL_DN        &kp C_MUTE          &kp C_PP            &kp C_STOP          &trans              &none               &none
+&kp LSHFT         &trans              &trans              &trans              &kp LSHFT           &bootloader     &trans          &trans          &bootloader         &kp DE_AE           &kp DE_OE           &kp DE_UE           &kp DE_SS           &trans              &none               &none
+&none             &none               &none               &trans              &trans              &trans                                          &trans              &trans              &trans              &trans              &trans              &none               &none               &none
+            >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+    };
+};
